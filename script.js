@@ -73,8 +73,8 @@ function removeFunction() {
 function toggleFunction() {
     const toggleArray = document.querySelectorAll('.toggleButton');
     toggleArray.forEach(toggle => {
-        toggle.removeEventListener('click', toggleClickHandler); // Remove existing event listener
-        toggle.addEventListener('click', toggleClickHandler); // Add new event listener
+        toggle.removeEventListener('click', toggleClickHandler); 
+        toggle.addEventListener('click', toggleClickHandler); 
     });
 }
 
