@@ -110,7 +110,7 @@ button:hover {
     display: grid;
     grid-template-columns: 2fr 1fr;
     grid-template-rows: 1fr 1fr 1fr 1fr;
-    max-height: 350px;
+    max-height: 340px;
     min-height: 300px;
 }
 
@@ -119,7 +119,7 @@ button:hover {
     grid-column: 2;
     align-self: start;
     justify-self: right;
-    position: absolute;
+    position: relative;
     margin-right: 5px;
     margin-top: 5px;
     padding: 5px;
@@ -241,17 +241,37 @@ button:hover {
     border: 1px solid green;
     border-radius: 4px;
 }
+
 .info label {
     font-size: 16px;
 }
+
 .form button {
     width: 200px;
     height: 30px;
     border-radius: 10px;
     background-color: white;
     border: 2px solid grey;
+    transition: .2s;
+}
+.form .cancel:hover {
+    background-color: rgba(252, 99, 99, 0.507);
+    border: 1px solid red;
+}
+.form button[type="submit"]:hover {
+    background-color: rgba(164, 255, 164, 0.527);
+    border: 1px solid green;
 }
 
 .form-radio label {
     margin-right: 10px;
+}
+form {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
 }

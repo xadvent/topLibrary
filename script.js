@@ -10,11 +10,19 @@ class Book {
     deleteSelf() {
         return library.splice(library.indexOf(this), 1)
     }
+    toggleRead() {
+        this.read ? this.read = false : this.read = true
+        return library.splice(library)
+    }
 }
 
 const content = document.getElementById('content')
-const addForm = document.querySelector('.form')
+const formcontainer = document.querySelector('.form')
 const addNewButton = document.querySelector('.addNew')
+const bookForm = document.querySelector('#bookform')
+const cancelButton = document.querySelector('.cancel')
+const createButton = document.createElement('button')
+createButton.classList.add('toggleRead')
 
 
 function deleteCards() {
@@ -38,6 +46,7 @@ function refresh() {
 
             quanda.appendChild(thingie)
         };
+
         quanda.appendChild(removeButton)
         content.appendChild(quanda)
     }; return
@@ -54,6 +63,17 @@ function removeFunction() {
     })
 }
 
+function showForm() {
+    content.classList.add('hidden')
+    formcontainer.classList.remove('hidden')
+    addNewButton.classList.add('hidden')
+}
+function hideForm() {
+    content.classList.remove('hidden')
+    formcontainer.classList.add('hidden')
+    addNewButton.classList.remove('hidden')
+}
+
 function addBooktoLibrary(title, author, pages, read) {
     let newBook = new Book(title, author, pages, read)
     library.push(newBook)
@@ -62,13 +82,26 @@ function addBooktoLibrary(title, author, pages, read) {
     return
 }
 
-addBooktoLibrary('veronica is cute', 'Pierce', 200, true)
+addBooktoLibrary('Prince is cute', 'Pierce', 200, true)
 addBooktoLibrary('Trust in God', "Pierce", 1, false)
 addBooktoLibrary('The Lord of the Rings', "Jk ROwling", 1024, true)
+bookForm.addEventListener('submit', dothing)
+function dothing(event) {
+    event.preventDefault()
+    const myFormData = new FormData(event.target)
+    console.log(myFormData)
+
+    const formDataObj = {}
+    myFormData.forEach((value, key) => (formDataObj[key] = value))
+    hideForm()
 
 
-addNewButton.addEventListener('click', function () {
-    content.classList.add('hidden')
-    addForm.classList.remove('hidden')
-    addNewButton.classList.add('hidden')
+    bookForm.reset()
+    return addBooktoLibrary(formDataObj.title, formDataObj.author, formDataObj.pages, formDataObj.read)
+}
+cancelButton.addEventListener('click', function(){
+    bookForm.reset()
+    hideForm()
 })
+
+addNewButton.addEventListener('click', showForm)

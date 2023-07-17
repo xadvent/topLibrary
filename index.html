@@ -19,18 +19,13 @@
         <button class="addNew">Add New Book</button>
     </div>
     <div id="content">
-        <div class="card">
-            <div class="title">Title</div>
-            <div class="author">author</div>
-            <div class="read">read</div>
-            <div class="pages">pages</div>
-            <button class="remove">Remove</button>
-        </div>
     </div>
+
     <div class="form hidden">
+    <form id="bookform">
         <div class="info">
             <label for="title">Title</label>
-            <input type="text" minlength="3" required>
+            <input type="text" minlength="3" id="title" name='title' required>
         </div>
         <div class="info">
             <label for="author">Author</label>
@@ -46,8 +41,10 @@
             <input type="radio" name="read" id="false" value="false" checked>
             <label for="false">Not Read Yet</label>
         </div>
-            
+        
         <button type="submit">Submit</button>
+        <button class="cancel">Cancel</button>
+    </form>
     </div>
 
     <div class="footer">
