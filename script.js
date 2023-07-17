@@ -20,8 +20,6 @@ const formcontainer = document.querySelector('.form');
 const addNewButton = document.querySelector('.addNew');
 const bookForm = document.querySelector('#bookform');
 const cancelButton = document.querySelector('.cancel');
-const createButton = document.createElement('button');
-createButton.classList.add('toggleRead');
 
 function deleteCards() {
     document.querySelectorAll('.card').forEach(e => e.remove());
@@ -111,8 +109,8 @@ function addBooktoLibrary(title, author, pages, read) {
     toggleFunction();
 }
 
-addBooktoLibrary('Prince is cute', 'Pierce', 200, false);
-addBooktoLibrary('Trust in God', 'Pierce', 1, false);
+addBooktoLibrary('1984', 'George Orwell', 328, false);
+addBooktoLibrary('Dune', 'Frank Herbert', 794, false);
 addBooktoLibrary('The Lord of the Rings', 'J.R.R Tolkien', 1178, true);
 
 bookForm.addEventListener('submit', cardFromForm);
