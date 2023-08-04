@@ -1,3 +1,8 @@
+const content = document.getElementById('content');
+const formcontainer = document.querySelector('.form');
+const addNewButton = document.querySelector('.addNew');
+const bookForm = document.querySelector('#bookform');
+const cancelButton = document.querySelector('.cancel');
 let library = [];
 
 class Book {
@@ -15,43 +20,42 @@ class Book {
     }
 }
 
-const content = document.getElementById('content');
-const formcontainer = document.querySelector('.form');
-const addNewButton = document.querySelector('.addNew');
-const bookForm = document.querySelector('#bookform');
-const cancelButton = document.querySelector('.cancel');
-
-function deleteCards() {
-    document.querySelectorAll('.card').forEach(e => e.remove());
-}
 
 function refresh() {
-    deleteCards();
+    document.querySelectorAll('.card').forEach(e => e.remove());
+
+    const createElementWithClass = function (type, designatedClass) {
+        const card = document.createElement(`${type}`)
+        card.classList.add(`${designatedClass}`)
+        return card
+    }
+
+    const createToggleButton = function () {
+        const toggleButton = document.createElement('button')
+        toggleButton.classList.add('toggleButton')
+        toggleButton.textContent = 'Toggle Read'
+        return toggleButton
+    }
+
     for (let i = 0; i < library.length; i++) {
-        const quanda = document.createElement('div');
-        quanda.classList.add('card');
-        const removeButton = document.createElement('button');
-        removeButton.classList.add('remove');
-        let item = library[i];
-        for (thing in item) {
-            const thingie = document.createElement('div');
-            thingie.classList.add(`${thing}`);
-            thingie.textContent = item[thing];
-            if (thing === 'read') {
-                if (item[thing] === false) {
-                    thingie.classList.add('red');
-                } else {
-                    thingie.classList.add('green');
-                }
+        const createdCard = createElementWithClass('div', 'card')
+        const removeButton = createElementWithClass('button', 'remove')
+        let book = library[i];
+        for (info in book) {
+            const infoDiv = createElementWithClass('div', info)
+            infoDiv.textContent = book[info];
+            if (info === 'read') {
+                if (book[info] === false) {
+                    infoDiv.classList.add('red');
+                } else infoDiv.classList.add('green');
             }
-            quanda.appendChild(thingie);
+            createdCard.appendChild(infoDiv);
         }
-        const toggleButton = document.createElement('button');
-        toggleButton.classList.add('toggleButton');
-        toggleButton.textContent = 'Toggle Read';
-        quanda.appendChild(toggleButton);
-        quanda.appendChild(removeButton);
-        content.appendChild(quanda);
+
+        const toggleButton = createToggleButton()
+        createdCard.appendChild(toggleButton);
+        createdCard.appendChild(removeButton);
+        content.appendChild(createdCard);
     }
     toggleFunction();
 }
@@ -71,8 +75,8 @@ function removeFunction() {
 function toggleFunction() {
     const toggleArray = document.querySelectorAll('.toggleButton');
     toggleArray.forEach(toggle => {
-        toggle.removeEventListener('click', toggleClickHandler); 
-        toggle.addEventListener('click', toggleClickHandler); 
+        toggle.removeEventListener('click', toggleClickHandler);
+        toggle.addEventListener('click', toggleClickHandler);
     });
 }
 
@@ -113,7 +117,6 @@ addBooktoLibrary('1984', 'George Orwell', 328, false);
 addBooktoLibrary('Dune', 'Frank Herbert', 794, false);
 addBooktoLibrary('The Lord of the Rings', 'J.R.R Tolkien', 1178, true);
 
-bookForm.addEventListener('submit', cardFromForm);
 
 function cardFromForm(event) {
     event.preventDefault();
@@ -126,11 +129,13 @@ function cardFromForm(event) {
 
     bookForm.reset();
     addBooktoLibrary(formDataObj.title, formDataObj.author, formDataObj.pages, formDataObj.read);
+    return
 }
-
-cancelButton.addEventListener('click', function () {
-    bookForm.reset();
-    hideForm();
-});
-
-addNewButton.addEventListener('click', showForm);
+const AddAllListeners = (function () {
+    cancelButton.addEventListener('click', function () {
+        bookForm.reset();
+        hideForm();
+    });
+    addNewButton.addEventListener('click', showForm);
+    bookForm.addEventListener('submit', cardFromForm);
+})()
