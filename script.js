@@ -20,7 +20,6 @@ class Book {
     }
 }
 
-
 function refresh() {
     document.querySelectorAll('.card').forEach(e => e.remove());
 
@@ -28,13 +27,6 @@ function refresh() {
         const card = document.createElement(`${type}`)
         card.classList.add(`${designatedClass}`)
         return card
-    }
-
-    const createToggleButton = function () {
-        const toggleButton = document.createElement('button')
-        toggleButton.classList.add('toggleButton')
-        toggleButton.textContent = 'Toggle Read'
-        return toggleButton
     }
 
     for (let i = 0; i < library.length; i++) {
@@ -51,15 +43,15 @@ function refresh() {
             }
             createdCard.appendChild(infoDiv);
         }
+        const toggleButton = createElementWithClass('button', 'toggleButton')
+        toggleButton.textContent = 'Toggle Read'
 
-        const toggleButton = createToggleButton()
         createdCard.appendChild(toggleButton);
         createdCard.appendChild(removeButton);
         content.appendChild(createdCard);
     }
     toggleFunction();
 }
-
 
 function removeFunction() {
     const buttonArray = document.querySelectorAll('.remove');
@@ -117,7 +109,6 @@ addBooktoLibrary('1984', 'George Orwell', 328, false);
 addBooktoLibrary('Dune', 'Frank Herbert', 794, false);
 addBooktoLibrary('The Lord of the Rings', 'J.R.R Tolkien', 1178, true);
 
-
 function cardFromForm(event) {
     event.preventDefault();
     const myFormData = new FormData(event.target);
@@ -131,6 +122,7 @@ function cardFromForm(event) {
     addBooktoLibrary(formDataObj.title, formDataObj.author, formDataObj.pages, formDataObj.read);
     return
 }
+
 const AddAllListeners = (function () {
     cancelButton.addEventListener('click', function () {
         bookForm.reset();
