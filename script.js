@@ -129,5 +129,73 @@ const AddAllListeners = (function () {
         hideForm();
     });
     addNewButton.addEventListener('click', showForm);
-    bookForm.addEventListener('submit', cardFromForm);
+    bookForm.addEventListener('submit', (event) => {
+        event.preventDefault()
+        if (validationChecker()) {
+            cardFromForm(event)
+        }
+    });
 })()
+
+const validateTitle = function () {
+    const title = document.getElementById('title')
+    title.reportValidity()
+
+    if (title.validity.rangeUnderflow) {
+        console.log('k')
+        title.setCustomValidity('Must be at least 3 Characters. You have ' + title.value.length)
+        return false
+    }
+
+    if (title.validity.rangeOverflow) {
+        title.setCustomValidity('Characters must be less than 20')
+        return false
+    }
+
+    title.setCustomValidity('')
+    return title.checkValidity()
+}
+
+const validateAuthor = function () {
+    const author = document.getElementById('author')
+    author.reportValidity()
+
+    if (author.validity.rangeUnderflow) {
+        author.setCustomValidity('Must be at least 3 Characters. You have ' + title.value.length)
+        return false
+    }
+
+    if (author.validity.rangeOverflow) {
+        author.setCustomValidity('Characters must be less than 20')
+        return false
+    }
+
+    author.setCustomValidity('')
+    return author.checkValidity()
+}
+
+const validatePages = function () {
+    const pages = document.getElementById('pages')
+    pages.reportValidity()
+
+    if (pages.validity.stepMismatch) {
+        pages.setCustomValidity('Must be in increments of 1.')
+        return false
+    } 
+
+    if (pages.value < 1) {
+        pages.setCustomValidity('Value must be above 0.') // better option
+        return false
+    }
+
+    pages.setCustomValidity('')
+    return pages.checkValidity()
+}
+
+const validationChecker = function () {
+    return (validateTitle() && validateAuthor() && validatePages())
+}
+
+document.querySelector('#title').oninput = validateTitle
+document.querySelector('#author').oninput = validateAuthor
+document.querySelector('#pages').oninput = validatePages

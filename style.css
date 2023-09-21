@@ -1,21 +1,26 @@
-html,body {
+html,
+body {
 	padding: 0px;
 	margin: 0px;
 	height: 100%;
 	width: 100%;
-	background-color: rgb(219,219,219);
+	background-color: rgb(219, 219, 219);
 	display: flex;
 	flex-direction: column;
 }
+
 * {
-	font-family: system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,'Open Sans','Helvetica Neue',sans-serif;
+	font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 	box-sizing: border-box;
 }
-a,a:visited {
+
+a,
+a:visited {
 	font-style: none;
 	color: black;
 	text-decoration: none;
 }
+
 .header {
 	background-color: white;
 	display: flex;
@@ -27,6 +32,7 @@ a,a:visited {
 	height: 10vh;
 	box-shadow: 0px 0px 5px 0px;
 }
+
 .subheader {
 	display: flex;
 	flex-direction: column;
@@ -34,11 +40,13 @@ a,a:visited {
 	padding-top: 10px;
 	align-items: center;
 	justify-content: center;
-    margin-bottom: 10px;
+	margin-bottom: 10px;
 }
+
 #content {
 	flex: 1;
 }
+
 .footer {
 	bottom: 0px;
 	height: 5vh;
@@ -50,19 +58,23 @@ a,a:visited {
 	justify-content: center;
 	margin-top: 10px;
 }
+
 .subheader button {
 	width: 130px;
 	font-weight: 500;
 	height: 50px;
 }
+
 .header button {
 	width: 100px;
 	height: 50px;
 	font-weight: bold;
 }
-.header button,.subheader button {
+
+.header button,
+.subheader button {
 	border-radius: 20px;
-	border: 2px solid rgb(193,193,193);
+	border: 2px solid rgb(193, 193, 193);
 	font-size: 14px;
 	display: flex;
 	align-items: center;
@@ -70,11 +82,13 @@ a,a:visited {
 	transition: .2s;
 	background-color: white;
 }
+
 button:hover {
 	scale: 0.98;
 	transition: 0.2s;
-	background-color: rgb(170,170,170);
+	background-color: rgb(170, 170, 170);
 }
+
 #content {
 	width: 90vw;
 	height: 95vh;
@@ -87,11 +101,12 @@ button:hover {
 	gap: 10px;
 	justify-content: center;
 }
+
 .card {
 	padding-left: 10px;
 	border-radius: 10px;
 	background-color: white;
-	border: 2px solid rgb(170,170,170);
+	border: 2px solid rgb(170, 170, 170);
 	display: grid;
 	grid-template-columns: 2fr 1fr;
 	grid-template-rows: 10px 1fr 1fr 1fr 1fr 0.7fr;
@@ -99,9 +114,10 @@ button:hover {
 	min-height: 360px;
 	min-width: 200px;
 	max-width: 500px;
-    padding-bottom: 5px;
-    overflow-x:auto;
+	padding-bottom: 5px;
+	overflow-x: auto;
 }
+
 .remove {
 	grid-row: 1;
 	grid-column: 2;
@@ -114,64 +130,88 @@ button:hover {
 	width: 15px;
 	height: 15px;
 	border-radius: 20px;
-	border: 1px solid rgb(170,170,170);
+	border: 1px solid rgb(170, 170, 170);
 }
+
 .remove:hover {
 	background-color: red;
 	scale: .98;
 	transition: 0.2s;
 }
+
 .title {
 	font-size: xx-large;
 	grid-row: 2;
 	grid-column: 1 / -1;
 }
-.title,.author,.pages,.read {
+
+.title,
+.author,
+.pages,
+.read {
 	font-weight: 300;
 }
+
 .author {
 	grid-row: 3;
 	grid-column: 1 / -1;
 }
+
 .pages {
 	grid-area: 4 / 1 / 5 / -1;
 }
+
 .read {
 	grid-row: 5;
 	grid-column: 1 / -1;
 }
-.author,.pages,.read {
+
+.author,
+.pages,
+.read {
 	font-size: x-large;
 }
+
 .title::before {
 	content: "'";
 }
+
 .title::after {
 	content: "'"
 }
+
 .read::before {
 	content: "Read: ";
 	color: black;
 }
+
 .red {
 	color: red;
 }
+
 .green {
 	color: green;
 }
+
 .pages::after {
 	content: " Pages";
 }
-.title,.author,.read,.pages {
+
+.title,
+.author,
+.read,
+.pages {
 	align-self: center;
 	justify-self: center;
 	text-align: center;
 }
+
 .hidden {
 	position: absolute;
 	left: -9999px;
 	transition: 0.2s;
 }
+
 .form {
 	align-items: center;
 	align-self: center;
@@ -187,11 +227,13 @@ button:hover {
 	box-shadow: 0px 0px 2px 0px;
 	justify-content: center;
 }
+
 .form .info {
 	display: flex;
 	flex-direction: column;
 	text-align: left;
 }
+
 .info input {
 	padding: 5px;
 	width: 200px;
@@ -199,23 +241,28 @@ button:hover {
 	margin-top: 5px;
 	font-size: 16px;
 }
+
 .info input:invalid {
 	border: 1px solid red;
-	background-color: rgba(255,90,90,0.504);
+	background-color: rgba(255, 90, 90, 0.504);
 	border-radius: 4px;
 }
-.info input:focus{
-	background-color: rgba(127,251,251,0.633);
-    border-color: blue;
+
+.info input:focus {
+	background-color: rgba(127, 251, 251, 0.633);
+	border-color: blue;
 }
+
 .info input:valid {
-	background-color: rgba(164,255,164,0.527);
+	background-color: rgba(164, 255, 164, 0.527);
 	border: 1px solid green;
 	border-radius: 4px;
 }
+
 .info label {
 	font-size: 16px;
 }
+
 .toggleButton {
 	grid-row: 6;
 	grid-column: 1 / -1;
@@ -227,8 +274,9 @@ button:hover {
 	border-radius: 5px;
 	transition: 0.2s;
 	font-size: 15px;
-    margin-bottom: 40px;
+	margin-bottom: 40px;
 }
+
 .form button {
 	width: 200px;
 	height: 30px;
@@ -237,17 +285,21 @@ button:hover {
 	border: 2px solid grey;
 	transition: .2s;
 }
+
 .form .cancel:hover {
-	background-color: rgba(252,99,99,0.507);
+	background-color: rgba(252, 99, 99, 0.507);
 	border: 1px solid red;
 }
+
 .form button[type="submit"]:hover {
-	background-color: rgba(164,255,164,0.527);
+	background-color: rgba(164, 255, 164, 0.527);
 	border: 1px solid green;
 }
+
 .form-radio label {
 	margin-right: 10px;
 }
+
 form {
 	width: 100%;
 	height: 100%;
@@ -255,5 +307,15 @@ form {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	gap:  20px;
+	gap: 20px;
+}
+
+.error {
+    max-width: 200px;
+	max-height: min-content;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+    background-color: rgba(255, 90, 90, 0.504);
+    word-wrap: normal;
+	display: block;
 }
