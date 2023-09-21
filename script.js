@@ -137,18 +137,24 @@ const AddAllListeners = (function () {
     });
 })()
 
-const validateTitle = function () {
+const validateTitle = function (event) {
     const title = document.getElementById('title')
-    title.reportValidity()
 
-    if (title.validity.rangeUnderflow) {
-        console.log('k')
-        title.setCustomValidity('Must be at least 3 Characters. You have ' + title.value.length)
+    if (title.validity.valueMissing){
+        title.setCustomValidity('Required')
+        title.reportValidity()
         return false
     }
 
-    if (title.validity.rangeOverflow) {
+    if (title.validity.tooShort) {
+        title.setCustomValidity('Must be at least 3 Characters. (Add ' + (3 - title.value.length) + ' more)')
+        title.reportValidity()
+        return false
+    }
+
+    if (title.validity.tooLong) {
         title.setCustomValidity('Characters must be less than 20')
+        title.reportValidity()
         return false
     }
 
@@ -156,35 +162,52 @@ const validateTitle = function () {
     return title.checkValidity()
 }
 
-const validateAuthor = function () {
-    const author = document.getElementById('author')
-    author.reportValidity()
+const validateAuthor = function (event) {
+    const author = document.getElementById('author');
+    author.checkValidity()
 
-    if (author.validity.rangeUnderflow) {
-        author.setCustomValidity('Must be at least 3 Characters. You have ' + title.value.length)
+    if (author.validity.valueMissing){
+        author.setCustomValidity('Required')
+        author.reportValidity()
         return false
     }
 
-    if (author.validity.rangeOverflow) {
-        author.setCustomValidity('Characters must be less than 20')
-        return false
+    if (author.validity.tooShort) {
+        author.setCustomValidity('Must be at least 3 Characters. (Add ' + (3 - author.value.length) + ' more)');
+        author.reportValidity();
+        return false;
     }
 
-    author.setCustomValidity('')
-    return author.checkValidity()
+    if (author.validity.tooLong) {
+        author.setCustomValidity('Characters must be less than 20');
+        author.reportValidity();
+        return false;
+    }
+
+    author.setCustomValidity('');
+    return true; // Return true for successful validation
 }
+
 
 const validatePages = function () {
     const pages = document.getElementById('pages')
     pages.reportValidity()
 
+    if (pages.validity.valueMissing){
+        pages.setCustomValidity('Required')
+        pages.reportValidity()
+        return false
+    }
+
     if (pages.validity.stepMismatch) {
         pages.setCustomValidity('Must be in increments of 1.')
+        pages.reportValidity()
         return false
     } 
 
-    if (pages.value < 1) {
+    if (pages.validity.rangeUnderflow) {
         pages.setCustomValidity('Value must be above 0.') // better option
+        pages.reportValidity()
         return false
     }
 
